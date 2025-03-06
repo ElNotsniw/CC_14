@@ -23,7 +23,16 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
     const priorityLabel = document.createElement('label');
     priorityLabel.textContent = priorityLevel
     ticket.appendChild(priorityLabel);
+
+    if (priorityLevel === 'High') {
+        ticket.classList.add('high-priority')
+    }
+
+    // (Task 3) - Highlighting High Priority Tickets
     
+    if (priorityLevel === 'High') {
+        ticket.classList.add('high-priority')
+    }
     // Creating a Resolve button
 
     const resolveButton = document.createElement('button');
@@ -40,7 +49,30 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
     ticketContainer.appendChild(ticket);
 }
 
-// Testing out the function by inputting a name, concern, and priority level
+// (Task 3) - Highlighting High Priority Tickets
+
+// Creating a function that highlights any tickets that have High Priority associated with it
+
+function highlightHighPriorityTickets() {
+    const highPriorityTickets = document.querySelectorAll('.high-priority')
+
+    const ticketArray = Array.from(highPriorityTickets);
+
+    ticketArray.forEach(function(ticket) {
+        ticket.style.backgroundColor = '#f8d7da';
+        ticket.style.border = '2px solid red';
+        ticket.style.border = '10px';
+        ticket.style.marginBottom = '10px';
+    })
+}
+
+
+// (Task 2) - Testing out the function by inputting a name, concern, and priority level
 
 createSupportTicket('Alice Johnson', 'Locked out of account', 'High');
-createSupportTicket('John Smith', 'Requesting refund for product', 'Low');  
+createSupportTicket('Ryan Mapp', 'Resetting password', 'High');
+createSupportTicket('John Smith', 'Requesting refund for product', 'Low');
+
+// (Task 3) - Creating a setTimeout method to make the priority tickets change appearance due to priority
+
+setTimeout(highlightHighPriorityTickets, 0);

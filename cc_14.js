@@ -39,14 +39,21 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
     resolveButton.textContent = 'Resolve';
     resolveButton.setAttribute('class', 'resolve-button');
 
-    resolveButton.addEventListener('click', function() {
+    // (Task 4) - Adding an event listener to remove the ticket when the "Resolve" button is clicked and add stopPropagation to prevent bubbling.
+    resolveButton.addEventListener('click', function(event) {
+        event.stopPropagation();
         ticket.remove();
-    })
+    });
 
     ticket.appendChild(resolveButton);
 
+    // (Task 4) - Creating a ticket container and having it console-logged when a ticket has been clicked.
+
     const ticketContainer = document.getElementById('ticketContainer');
     ticketContainer.appendChild(ticket);
+    ticketContainer.addEventListener('click', function() {
+        console.log('A ticket was clicked.')
+    })
 }
 
 // (Task 3) - Highlighting High Priority Tickets

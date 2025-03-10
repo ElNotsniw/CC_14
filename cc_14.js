@@ -28,15 +28,6 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
         ticket.classList.add('high-priority')
     }
 
-
-// -------------------------------------------------------------------------------------------------------------------    
-
-
-    // (Task 3) - Highlighting High Priority Tickets
-    
-    if (priorityLevel === 'High') {
-        ticket.classList.add('high-priority')
-    }
     // Creating a Resolve button
 
     const resolveButton = document.createElement('button');
@@ -44,12 +35,45 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
     resolveButton.setAttribute('class', 'resolve-button');
 
 
-
-    // -------------------------------------------------------------------------------------------------------------------   
-
+// -------------------------------------------------------------------------------------------------------------------    
 
 
-    // (Task 4) - Adding an event listener to remove the ticket when the "Resolve" button is clicked and add stopPropagation to prevent bubbling.
+
+// (Task 3) - Highlighting High Priority Tickets
+    
+    if (priorityLevel === 'High') {
+        ticket.classList.add('high-priority')
+    }
+
+
+// Creating a function that highlights any tickets that have High Priority associated with it
+
+function highlightHighPriorityTickets() {
+    const highPriorityTickets = document.querySelectorAll('.high-priority')
+
+    const ticketArray = Array.from(highPriorityTickets);
+
+    ticketArray.forEach(function(ticket) {
+        ticket.style.backgroundColor = '#f8d7da';
+        ticket.style.border = '2px solid red';
+        ticket.style.border = '10px';
+        ticket.style.marginBottom = '10px';
+    })
+}
+
+// Creating a setTimeout method to make the priority tickets change appearance due to priority
+
+setTimeout(highlightHighPriorityTickets, 0);
+
+
+
+// -------------------------------------------------------------------------------------------------------------------   
+
+
+
+// (Task 4) - Support Ticket Resolution with Event Bubbling
+    
+// Adding an event listener to remove the ticket when the "Resolve" button is clicked and add stopPropagation to prevent bubbling.
 
     resolveButton.addEventListener('click', function(event) {
         event.stopPropagation();
@@ -58,7 +82,7 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
 
     ticket.appendChild(resolveButton);
 
-    // (Task 4) - Creating a ticket container and having it console-logged when a ticket has been clicked.
+// Creating a ticket container and having it console-logged when a ticket has been clicked.
 
     const ticketContainer = document.getElementById('ticketContainer');
     ticketContainer.appendChild(ticket);
@@ -67,7 +91,10 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
     })
 
 
+
 // -------------------------------------------------------------------------------------------------------------------   
+
+
 
 
 // (Task 5) - Inline Editing of Support Tickets
@@ -83,6 +110,8 @@ ticket.appendChild(editbutton)
 editbutton.addEventListener('click', function(event) {
     event.stopPropagation();
 
+    // Creating new variables to let the user replace the current information displayed
+
     const currentName = customerHeading.textContent;
     const currentIssue = issuePara.textContent.replace('Issue: ', '');
     const currentPriority = priorityLabel.textContent.replace('Priority: ', '');
@@ -96,6 +125,8 @@ editbutton.addEventListener('click', function(event) {
     const priorityinput = document.createElement('input')
     priorityinput.value = currentPriority;
 
+    // Creating a save button to save new information displayed
+    
     const savebutton = document.createElement('button');
     savebutton.textContent = 'Save';
 
@@ -131,26 +162,3 @@ createSupportTicket('John Smith', 'Requesting refund for product', 'Low');
 
 
 // -------------------------------------------------------------------------------------------------------------------
-
-
-
-// (Task 3) - Highlighting High Priority Tickets
-
-// Creating a function that highlights any tickets that have High Priority associated with it
-
-function highlightHighPriorityTickets() {
-    const highPriorityTickets = document.querySelectorAll('.high-priority')
-
-    const ticketArray = Array.from(highPriorityTickets);
-
-    ticketArray.forEach(function(ticket) {
-        ticket.style.backgroundColor = '#f8d7da';
-        ticket.style.border = '2px solid red';
-        ticket.style.border = '10px';
-        ticket.style.marginBottom = '10px';
-    })
-}
-
-// Creating a setTimeout method to make the priority tickets change appearance due to priority
-
-setTimeout(highlightHighPriorityTickets, 0);

@@ -4,7 +4,7 @@
 
 function createSupportTicket(customerName, issueDescription, priorityLevel) {
     const ticket = document.createElement('div');
-    ticket.setAttribute('class', 'ticket');
+    ticket.setAttribute('class', 'id');
 
     // Creating customer's name
 
@@ -95,8 +95,6 @@ setTimeout(highlightHighPriorityTickets, 0);
 // -------------------------------------------------------------------------------------------------------------------   
 
 
-
-
 // (Task 5) - Inline Editing of Support Tickets
 
 // Creating an edit button to change the current information displayed and let the user input their own information.
@@ -151,7 +149,6 @@ editbutton.addEventListener('click', function(event) {
 
 
 // -------------------------------------------------------------------------------------------------------------------
-
 
 
 // (Task 2) - Testing out the function by inputting a name, concern, and priority level

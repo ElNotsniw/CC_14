@@ -28,6 +28,10 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
         ticket.classList.add('high-priority')
     }
 
+
+// -------------------------------------------------------------------------------------------------------------------    
+
+
     // (Task 3) - Highlighting High Priority Tickets
     
     if (priorityLevel === 'High') {
@@ -39,7 +43,14 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
     resolveButton.textContent = 'Resolve';
     resolveButton.setAttribute('class', 'resolve-button');
 
+
+
+    // -------------------------------------------------------------------------------------------------------------------   
+
+
+
     // (Task 4) - Adding an event listener to remove the ticket when the "Resolve" button is clicked and add stopPropagation to prevent bubbling.
+
     resolveButton.addEventListener('click', function(event) {
         event.stopPropagation();
         ticket.remove();
@@ -54,7 +65,74 @@ function createSupportTicket(customerName, issueDescription, priorityLevel) {
     ticketContainer.addEventListener('click', function() {
         console.log('A ticket was clicked.')
     })
+
+
+// -------------------------------------------------------------------------------------------------------------------   
+
+
+// (Task 5) - Inline Editing of Support Tickets
+
+// Creating an edit button to change the current information displayed and let the user input their own information.
+
+const editbutton = document.createElement('button');
+editbutton.textContent = 'Edit';
+editbutton.setAttribute('class', 'edit-btn');
+
+ticket.appendChild(editbutton)
+
+editbutton.addEventListener('click', function(event) {
+    event.stopPropagation();
+
+    const currentName = customerHeading.textContent;
+    const currentIssue = issuePara.textContent.replace('Issue: ', '');
+    const currentPriority = priorityLabel.textContent.replace('Priority: ', '');
+
+    const nameinput = document.createElement('input');
+    nameinput.value = currentName;
+
+    const issueinput = document.createElement('input');
+    issueinput.value = currentIssue;
+
+    const priorityinput = document.createElement('input')
+    priorityinput.value = currentPriority;
+
+    const savebutton = document.createElement('button');
+    savebutton.textContent = 'Save';
+
+    customerHeading.innerHTML = '';
+    issuePara.innerHTML = '';
+    priorityLabel.innerHTML = '';
+
+    customerHeading.appendChild(nameinput);
+    issuePara.appendChild(issueinput);
+    priorityLabel.appendChild(priorityinput);
+    ticket.appendChild(savebutton);
+
+    savebutton.addEventListener('click', function() {
+        customerHeading.textContent = nameinput.value
+        issuePara.textContent = `Issue: ${issueinput.value}`;
+        priorityLabel.textContent = `Priority: ${priorityinput.value}`;
+
+        savebutton.remove();
+    })
+})
 }
+
+
+// -------------------------------------------------------------------------------------------------------------------
+
+
+
+// (Task 2) - Testing out the function by inputting a name, concern, and priority level
+
+createSupportTicket('Alice Johnson', 'Locked out of account', 'High');
+createSupportTicket('Ryan Mapp', 'Resetting password', 'High');
+createSupportTicket('John Smith', 'Requesting refund for product', 'Low');
+
+
+// -------------------------------------------------------------------------------------------------------------------
+
+
 
 // (Task 3) - Highlighting High Priority Tickets
 
@@ -73,13 +151,6 @@ function highlightHighPriorityTickets() {
     })
 }
 
-
-// (Task 2) - Testing out the function by inputting a name, concern, and priority level
-
-createSupportTicket('Alice Johnson', 'Locked out of account', 'High');
-createSupportTicket('Ryan Mapp', 'Resetting password', 'High');
-createSupportTicket('John Smith', 'Requesting refund for product', 'Low');
-
-// (Task 3) - Creating a setTimeout method to make the priority tickets change appearance due to priority
+// Creating a setTimeout method to make the priority tickets change appearance due to priority
 
 setTimeout(highlightHighPriorityTickets, 0);
